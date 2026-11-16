@@ -1,0 +1,14 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Claude'u ara</title>
+<style>body{font-family:sans-serif;background:#111;color:#eee;display:flex;align-items:center;
+justify-content:center;height:100vh;margin:0;text-align:center;font-size:1.6em}</style></head>
+<body><div id="d">Claude'a bağlanılıyor...</div><script>
+const k = location.hash.slice(1);
+const d = document.getElementById("d");
+if (!k) { d.textContent = "Link eksik: sonunda #anahtar olmalı."; }
+else fetch("https://api.github.com/repos/Tuna1123/claude-ara/contents/base.txt?t=" + Date.now(),
+  {headers: {Accept: "application/vnd.github.raw"}, cache: "no-store"})
+ .then(r => { if (!r.ok) throw 0; return r.text(); })
+ .then(b => { location.replace(b.trim() + "/ara?k=" + encodeURIComponent(k)); })
+ .catch(() => { d.textContent = "Sunucu adresi alınamadı. Bilgisayar kapalı olabilir."; });
+</script></body></html>
